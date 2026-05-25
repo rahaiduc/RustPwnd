@@ -10,6 +10,8 @@ fn main() {
     let (median, mode) = median_and_mode(lista);
     println!("The median is {median} and the mode is {mode}");
 
+    let result = pig_latin("first".to_string());
+    println!("{result}");
 
     let elapsed_time = now.elapsed();
     println!("Running slow_function() took {} seconds.", elapsed_time.as_secs_f64());
@@ -32,4 +34,20 @@ fn median_and_mode(mut lista: Vec<i32>)->(i32, i32){
         }
     }
     (median,mode)
+}
+
+fn pig_latin(mut word: String)->String{
+    match word.chars().next(){
+        Some(c)=>match c.to_ascii_lowercase() {
+            'a' | 'e' | 'i' | 'o' | 'u' =>{
+                word.push_str("hay");
+            },
+            _ => {
+                word.remove(0);
+                word.push_str(&format!("{}ay",c).to_string());
+            },
+        },
+        None=> print!("No caracter"),
+    }
+    return word;
 }
